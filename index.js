@@ -12,7 +12,9 @@ const pagination = document.querySelector('[data-js="pagination"]');
 
 export async function fetchCharacters() {
   try {
-    const result = await fetch(`https://rickandmortyapi.com/api/character/?page=${page}`);
+    const result = await fetch(
+      `https://rickandmortyapi.com/api/character/?page=${page}&name=${searchQuery}`
+    );
     const myData = await result.json();
 
     console.log(myData);
@@ -22,6 +24,7 @@ export async function fetchCharacters() {
       cardContainer.append(createCharacterCard(card));
       card;
     });
+    pagination.textContent = `${page} / ${myData.info.pages}`;
   } catch (error) {
     console.error(error);
   }
@@ -37,21 +40,27 @@ fetchCharacters();
 
 prevButton.addEventListener("click", (e) => {
   e.preventDefault();
-  if(page > 1) {
-    --page
-    fetchCharacters(page)
+  if (page > 1) {
+    --page;
+    fetchCharacters(page);
   }
-  pagination.textContent = `${page} / ${maxPage}` 
-
-})
+});
 
 nextButton.addEventListener("click", (e) => {
   e.preventDefault();
-  if(page < maxPage) {
-    ++page
-    fetchCharacters(page)
+  if (page < maxPage) {
+    ++page;
+    fetchCharacters(page);
   }
-  pagination.textContent = `${page} / ${maxPage}`   
-})
+});
 
 // Nav-Pagination
+
+// Search-Bar
+
+searchBar.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const formElements = e.target.elements;
+  searchQuery = formElements.query.value;
+  fetchCharacters();
+});
