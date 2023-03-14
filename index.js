@@ -33,19 +33,25 @@ let searchQuery = "";
 
 fetchCharacters();
 
+// Nav-Pagination
 
 prevButton.addEventListener("click", (e) => {
   e.preventDefault();
   if(page > 1) {
-    page--
+    --page
     fetchCharacters(page)
   }
+  pagination.textContent = `${page} / ${maxPage}` 
+
 })
 
 nextButton.addEventListener("click", (e) => {
   e.preventDefault();
   if(page < maxPage) {
-    page++
+    ++page
     fetchCharacters(page)
   }
+  pagination.textContent = `${page} / ${maxPage}`   
 })
+
+// Nav-Pagination
