@@ -24,5 +24,5 @@ export function createCharacterCard(cardItem) {
             </dl>
         </div>
     `;
-  return li;
+    return li;
 }

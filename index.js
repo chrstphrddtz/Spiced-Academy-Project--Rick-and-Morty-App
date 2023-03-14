@@ -17,9 +17,6 @@ export async function fetchCharacters(page) {
       `https://rickandmortyapi.com/api/character/?page=${page}&name=${searchQuery}`
     );
     const myData = await result.json();
-
-    console.log(myData);
-
     window.maxPage = myData.info.pages
     cardContainer.innerHTML = "";
     myData.results.forEach((card) => {
