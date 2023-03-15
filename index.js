@@ -61,6 +61,7 @@ searchBar.addEventListener("submit", (e) => {
   e.preventDefault();
   page = 1
   const formElements = e.target.elements;
-  searchQuery = formElements.query.value;
+  const lowerCase = formElements.query.value
+  searchQuery = lowerCase.toLowerCase();
   fetchCharacters();
 });
